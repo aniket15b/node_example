@@ -94,9 +94,10 @@ RUN mkdir -p /home/ros/ws/src
 
 WORKDIR /home/ros/ws/src
 
-RUN . /opt/ros/${ROS_DISTRO}/setup.bash \
+RUN /bin/bash -c "source /opt/ros/${ROS_DISTRO}/setup.bash"
     # Update apt-get because its cache is always cleared after installs to keep image size down
-    && apt-get update \
+
+RUN apt-get update \
     # ROS File Server
     && git clone https://github.com/aniket15b/node_example.git \
     # Install dependencies
