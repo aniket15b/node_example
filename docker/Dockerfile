@@ -1,6 +1,6 @@
-ARG ROS_DISTRO=noetic
+ARG ROS_DISTRO=melodic
 FROM ros:$ROS_DISTRO-ros-core
-ARG PYTHON_VERSION=3
+ARG PYTHON_VERSION=
 LABEL Name="ROS Node Example"
 LABEL Version="0.1"
 
