@@ -68,6 +68,7 @@ RUN apt-get update && apt-get install -y \
     python3-yapsy \
     ros-$ROS_DISTRO-roslint \
     uncrustify && \
+    python-catkin-tools && \
     apt-get clean
 
 # Need to initialize rosdep as root.
