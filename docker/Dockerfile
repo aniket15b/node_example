@@ -100,4 +100,24 @@ RUN rosdep update
 # Make a workspace directory that can be mounted as a volume from the host system.
 # This approach is taken so that the actual packages to build reside on the host system where the users preferred
 # development tools can be used when editing files.
-RUN mkdir /home/ros/ws
+RUN mkdir -p /home/ros/ws/src
+
+WORKDIR /home/ros/ws/src
+
+RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
+    # Update apt-get because its cache is always cleared after installs to keep image size down
+    && apt-get update \
+    # ROS File Server
+    && git clone https://github.com/aniket15b/node_example.git \
+    # Install dependencies
+    && cd /home/ros/ws \
+    # Build catkin workspace
+    && catkin build
+
+RUN echo "source /ros_catkin_entrypoint.sh" >> /root/.bashrc
+
+COPY ./ros_catkin_entrypoint.sh /
+RUN chmod +x /ros_catkin_entrypoint.sh
+
+ENTRYPOINT ["/ros_catkin_entrypoint.sh"]
+CMD ["bash"]
