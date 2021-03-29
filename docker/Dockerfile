@@ -92,14 +92,14 @@ RUN rosdep update
 # development tools can be used when editing files.
 RUN mkdir -p /home/ros/ws/src
 
-WORKDIR /home/ros/ws/src
+RUN cd /home/ros/ws/src
 
 RUN /bin/bash -c "source /opt/ros/${ROS_DISTRO}/setup.bash"
     # Update apt-get because its cache is always cleared after installs to keep image size down
 
-RUN git clone https://github.com/aniket15b/node_example.git \
-    # Install dependencies
-    && cd /home/ros/ws \
+RUN git clone https://github.com/aniket15b/node_example.git 
+
+RUN cd /home/ros/ws \
     # Build catkin workspace
     && catkin build
 
