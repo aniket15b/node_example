@@ -70,9 +70,6 @@ RUN apt-get update && apt-get install -y \
     uncrustify && \
     apt-get clean
 
-# Upgrade pip.
-RUN python$PYTHON_VERSION -m pip install --upgrade pip && python3 -m pip install --upgrade pip
-
 # Install packages with pip.
 RUN pip3 install --upgrade catkin_pkg pytest statick statick-md statick-web
 # black removed until Python 3.5 support is no longer needed (Python 3.5 is default for xenial/kinetic)
