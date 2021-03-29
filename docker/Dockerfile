@@ -70,13 +70,6 @@ RUN apt-get update && apt-get install -y \
     uncrustify && \
     apt-get clean
 
-# Install packages with pip.
-RUN pip3 install --upgrade catkin_pkg pytest statick statick-md statick-web
-# black removed until Python 3.5 support is no longer needed (Python 3.5 is default for xenial/kinetic)
-
-# Temporarily needed for Noetic until a proper fix is applied upstream.
-RUN python3 -m pip install git+https://github.com/catkin/catkin_tools.git
-
 # Need to initialize rosdep as root.
 RUN rosdep init
 
